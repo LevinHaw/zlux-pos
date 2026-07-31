@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:zlux_pos/core/theme/app_colors_ext.dart';
 import 'package:zlux_pos/features/setup/merchant/presentation/viewmodel/setup_merchant_viewmodel.dart';
 
-import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/constants/app_size.dart';
 import '../../../../../core/constants/app_strings.dart';
 
@@ -64,9 +64,9 @@ class _SetupMerchantScreenState extends ConsumerState<SetupMerchantScreen> {
     final state = ref.watch(setupMerchantViewModelProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.appColors.background,
       appBar: AppBar(
-        backgroundColor: AppColors.background,
+        backgroundColor: context.appColors.background,
         elevation: 0,
         leading: const BackButton(),
         title: const Text(AppStrings.setupMerchant),
@@ -83,7 +83,7 @@ class _SetupMerchantScreenState extends ConsumerState<SetupMerchantScreen> {
                   onTap: _pickImage,
                   child: CircleAvatar(
                     radius: AppSizes.lg,
-                    backgroundColor: AppColors.surface,
+                    backgroundColor: context.appColors.surface,
                     backgroundImage: state.imageFile != null
                         ? FileImage(state.imageFile!)
                         : null,

@@ -24,6 +24,25 @@ class ExpenseEntryDao extends DatabaseAccessor<AppDatabase>
         .getSingleOrNull();
   }
 
+  Stream<List<ExpenseEntryData>> watchExpenseEntriesByDate(
+    String ownerId,
+    DateTime date,
+  ) {
+    final startOfDay = DateTime(date.year, date.month, date.day);
+    final endOfDay = startOfDay.add(const Duration(days: 1));
+
+    final query = select(expenseEntries)
+      ..where(
+        (e) =>
+            e.ownerId.equals(ownerId) &
+            e.isDeleted.equals(false) &
+            e.date.isBiggerOrEqualValue(startOfDay) &
+            e.date.isSmallerThanValue(endOfDay),
+      )
+      ..orderBy([(e) => OrderingTerm.desc(e.date)]);
+    return query.watch();
+  }
+
   Future<ExpenseEntryData?> findEntryForDate({
     required String ownerId,
     required String expenseId,
@@ -42,6 +61,34 @@ class ExpenseEntryDao extends DatabaseAccessor<AppDatabase>
                 e.date.isSmallerThanValue(endOfDay),
           ))
         .getSingleOrNull();
+  }
+
+  Stream<List<DateTime>> watchDatesInMonth(
+    String ownerId,
+    int year,
+    int month,
+  ) {
+    final start = DateTime(year, month, 1);
+    final end = DateTime(year, month + 1, 1);
+
+    final query = selectOnly(expenseEntries, distinct: true)
+      ..addColumns([expenseEntries.date])
+      ..where(
+        expenseEntries.ownerId.equals(ownerId) &
+            expenseEntries.isDeleted.equals(false) &
+            expenseEntries.date.isBiggerOrEqualValue(start) &
+            expenseEntries.date.isSmallerThanValue(end),
+      );
+
+    return query.watch().map((rows) {
+      final days = rows
+          .map((r) => r.read(expenseEntries.date)!)
+          .map((dt) => DateTime(dt.year, dt.month, dt.day))
+          .toSet()
+          .toList();
+      days.sort((a, b) => a.compareTo(b));
+      return days;
+    });
   }
 
   Future<void> upsertExpenseEntry(ExpenseEntriesCompanion entry) {

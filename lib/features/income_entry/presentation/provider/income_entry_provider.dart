@@ -11,6 +11,9 @@ import 'package:zlux_pos/features/income_entry/domain/usecase/pull_income_entrie
 import 'package:zlux_pos/features/income_entry/domain/usecase/save_income_entry_usecase.dart';
 import 'package:zlux_pos/features/income_entry/domain/usecase/watch_income_entries_usecase.dart';
 
+import '../../domain/usecase/watch_income_dates_in_month_usecase.dart';
+import '../../domain/usecase/watch_income_entries_by_date_usecase.dart';
+
 part 'income_entry_provider.g.dart';
 
 String _requireUid() {
@@ -69,4 +72,22 @@ WatchIncomeEntriesUsecase watchIncomeEntriesUsecase(
   WatchIncomeEntriesUsecaseRef ref,
 ) {
   return WatchIncomeEntriesUsecase(ref.watch(incomeEntryRepositoryProvider));
+}
+
+@riverpod
+WatchIncomeEntriesByDateUsecase watchIncomeEntriesByDateUsecase(
+  WatchIncomeEntriesByDateUsecaseRef ref,
+) {
+  return WatchIncomeEntriesByDateUsecase(
+    ref.watch(incomeEntryRepositoryProvider),
+  );
+}
+
+@riverpod
+WatchIncomeDatesInMonthUsecase watchIncomeDatesInMonthUsecase(
+  WatchIncomeDatesInMonthUsecaseRef ref,
+) {
+  return WatchIncomeDatesInMonthUsecase(
+    ref.watch(incomeEntryRepositoryProvider),
+  );
 }

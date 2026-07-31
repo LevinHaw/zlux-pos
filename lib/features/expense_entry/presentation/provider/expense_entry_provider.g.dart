@@ -153,5 +153,47 @@ final watchExpenseEntriesUsecaseProvider =
 // ignore: unused_element
 typedef WatchExpenseEntriesUsecaseRef =
     AutoDisposeProviderRef<WatchExpenseEntriesUsecase>;
+String _$watchExpenseEntriesByDateUsecaseHash() =>
+    r'3056ef518a09cfe9f63afa0f2536375adfe4b0f0';
+
+/// See also [watchExpenseEntriesByDateUsecase].
+@ProviderFor(watchExpenseEntriesByDateUsecase)
+final watchExpenseEntriesByDateUsecaseProvider =
+    AutoDisposeProvider<WatchExpenseEntriesByDateUsecase>.internal(
+      watchExpenseEntriesByDateUsecase,
+      name: r'watchExpenseEntriesByDateUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchExpenseEntriesByDateUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchExpenseEntriesByDateUsecaseRef =
+    AutoDisposeProviderRef<WatchExpenseEntriesByDateUsecase>;
+String _$watchExpenseDatesInMonthUsecaseHash() =>
+    r'32ba1d15d1b70b397d1c1dc0872e48da5dbce913';
+
+/// See also [watchExpenseDatesInMonthUsecase].
+@ProviderFor(watchExpenseDatesInMonthUsecase)
+final watchExpenseDatesInMonthUsecaseProvider =
+    AutoDisposeProvider<WatchExpenseDatesInMonthUsecase>.internal(
+      watchExpenseDatesInMonthUsecase,
+      name: r'watchExpenseDatesInMonthUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchExpenseDatesInMonthUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchExpenseDatesInMonthUsecaseRef =
+    AutoDisposeProviderRef<WatchExpenseDatesInMonthUsecase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

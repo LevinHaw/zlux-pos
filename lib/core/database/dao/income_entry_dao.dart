@@ -24,6 +24,25 @@ class IncomeEntryDao extends DatabaseAccessor<AppDatabase>
         .getSingleOrNull();
   }
 
+  Stream<List<IncomeEntryData>> watchIncomeEntriesByDate(
+    String ownerId,
+    DateTime date,
+  ) {
+    final startOfDay = DateTime(date.year, date.month, date.day);
+    final endOfDay = startOfDay.add(const Duration(days: 1));
+
+    final query = select(incomeEntries)
+      ..where(
+        (e) =>
+            e.ownerId.equals(ownerId) &
+            e.isDeleted.equals(false) &
+            e.date.isBiggerOrEqualValue(startOfDay) &
+            e.date.isSmallerThanValue(endOfDay),
+      )
+      ..orderBy([(e) => OrderingTerm.desc(e.date)]);
+    return query.watch();
+  }
+
   Future<IncomeEntryData?> findEntryForDate({
     required String ownerId,
     required String incomeId,
@@ -42,6 +61,34 @@ class IncomeEntryDao extends DatabaseAccessor<AppDatabase>
                 e.date.isSmallerThanValue(endOfDay),
           ))
         .getSingleOrNull();
+  }
+
+  Stream<List<DateTime>> watchDatesInMonth(
+    String ownerId,
+    int year,
+    int month,
+  ) {
+    final start = DateTime(year, month, 1);
+    final end = DateTime(year, month + 1, 1);
+
+    final query = selectOnly(incomeEntries, distinct: true)
+      ..addColumns([incomeEntries.date])
+      ..where(
+        incomeEntries.ownerId.equals(ownerId) &
+            incomeEntries.isDeleted.equals(false) &
+            incomeEntries.date.isBiggerOrEqualValue(start) &
+            incomeEntries.date.isSmallerThanValue(end),
+      );
+
+    return query.watch().map((rows) {
+      final days = rows
+          .map((r) => r.read(incomeEntries.date)!)
+          .map((dt) => DateTime(dt.year, dt.month, dt.day))
+          .toSet()
+          .toList();
+      days.sort((a, b) => a.compareTo(b));
+      return days;
+    });
   }
 
   Future<void> upsertIncomeEntry(IncomeEntriesCompanion entry) {
@@ -76,4 +123,8 @@ class IncomeEntryDao extends DatabaseAccessor<AppDatabase>
         .write(const IncomeEntriesCompanion(isSynced: Value(true)));
   }
 }
+
+
+
+
 

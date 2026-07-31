@@ -91,6 +91,17 @@ class IncomeEntryRepositoryImpl implements IncomeEntryRepository {
   Stream<List<IncomeEntryEntity>> watchIncomeEntries() =>
       _local.watchIncomeEntries(_ownerId());
 
+  @override
+  Stream<List<IncomeEntryEntity>> watchIncomeEntriesByDate(DateTime date) =>
+      _local.watchIncomeEntriesByDate(_ownerId(), date);
+
+  @override
+  Stream<List<DateTime>> watchIncomeDatesInMonth({
+    required int year,
+    required int month,
+  }) =>
+      _local.watchDatesInMonth(_ownerId(), year, month);
+
   Future<void> _pushOne(String ownerId, IncomeEntryEntity entity) async {
     try {
       await _remote.pushIncomeEntry(

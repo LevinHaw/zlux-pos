@@ -24,4 +24,5 @@ class RoutePaths {
   static const String history = '/history';
   static const String historyOrder = '/history/order';
   static const String editOrder = '/history/order-edit';
+  static const String report = '/report';
 }

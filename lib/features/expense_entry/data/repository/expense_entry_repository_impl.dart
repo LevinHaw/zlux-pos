@@ -91,6 +91,17 @@ class ExpenseEntryRepositoryImpl implements ExpenseEntryRepository {
   Stream<List<ExpenseEntryEntity>> watchExpenseEntries() =>
       _local.watchExpenseEntries(_ownerId());
 
+  @override
+  Stream<List<ExpenseEntryEntity>> watchExpenseEntriesByDate(DateTime date) =>
+      _local.watchExpenseEntriesByDate(_ownerId(), date);
+
+  @override
+  Stream<List<DateTime>> watchExpenseDatesInMonth({
+    required int year,
+    required int month,
+  }) =>
+      _local.watchDatesInMonth(_ownerId(), year, month);
+
   Future<void> _pushOne(String ownerId, ExpenseEntryEntity entity) async {
     try {
       await _remote.pushExpenseEntry(
@@ -108,3 +119,4 @@ class ExpenseEntryRepositoryImpl implements ExpenseEntryRepository {
     } catch (_) {}
   }
 }
+

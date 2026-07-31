@@ -28,6 +28,23 @@ class IncomeEntryLocalDatasource {
         .map((rows) => rows.map((r) => r.toEntity()).toList());
   }
 
+  Stream<List<IncomeEntryEntity>> watchIncomeEntriesByDate(
+    String ownerId,
+    DateTime date,
+  ) {
+    return _dao
+        .watchIncomeEntriesByDate(ownerId, date)
+        .map((rows) => rows.map((r) => r.toEntity()).toList());
+  }
+
+  Stream<List<DateTime>> watchDatesInMonth(
+    String ownerId,
+    int year,
+    int month,
+  ) {
+    return _dao.watchDatesInMonth(ownerId, year, month);
+  }
+
   Future<IncomeEntryEntity?> getIncomeEntry(String id) async {
     final row = await _dao.getIncomeEntry(id);
     return row?.toEntity();

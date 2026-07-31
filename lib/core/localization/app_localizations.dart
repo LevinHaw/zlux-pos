@@ -45,6 +45,25 @@ class AppLocalizations {
   String get itemsPerOrder => _id ? 'Item per pesanan' : 'Item per order';
   String get averageOrder => _id ? 'Rata-rata pesanan' : 'Average order';
 
+  String get dailyReport => _id ? 'Laporan harian' : 'Daily report';
+  String get reportTransactionIncome =>
+      _id ? 'Pendapatan dari transaksi' : 'Income from transactions';
+  String get reportIncomeEntry =>
+      _id ? 'Pendapatan dari income entry' : 'Income from income entries';
+  String get reportTotalIncome => _id ? 'Total pendapatan' : 'Total income';
+  String get reportTotalExpense => _id ? 'Total pengeluaran' : 'Total expense';
+  String get reportProfit => _id ? 'Laba' : 'Profit';
+  String get pickReportDate => _id ? 'Pilih tanggal' : 'Pick date';
+  String get reportMenu => _id ? 'Laporan' : 'Report';
+  String get reportProductDetail =>
+      _id ? 'Detail transaksi per produk' : 'Transaction detail per product';
+  String get reportPaymentMethod =>
+      _id ? 'Metode pembayaran' : 'Payment method';
+  String get reportCash => _id ? 'Tunai' : 'Cash';
+  String get reportTransfer => _id ? 'Transfer' : 'Transfer';
+  String get product => _id ? 'Produk' : 'Product';
+  String get quantity => _id ? 'Jumlah' : 'Quantity';
+
   String get home => _id ? 'Beranda' : 'Home';
   String get history => _id ? 'Riwayat' : 'History';
   String get setup => _id ? 'Konfigurasi' : 'Setup';

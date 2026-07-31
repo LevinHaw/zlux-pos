@@ -4,6 +4,13 @@ import 'package:zlux_pos/features/expense_entry/domain/entities/expense_entry_en
 abstract class ExpenseEntryRepository {
   Stream<List<ExpenseEntryEntity>> watchExpenseEntries();
 
+  Stream<List<ExpenseEntryEntity>> watchExpenseEntriesByDate(DateTime date);
+
+  Stream<List<DateTime>> watchExpenseDatesInMonth({
+    required int year,
+    required int month,
+  });
+
   Future<ExpenseEntryEntity?> getExpenseEntry(String id);
 
   Future<Result<ExpenseEntryEntity>> saveExpenseEntry({

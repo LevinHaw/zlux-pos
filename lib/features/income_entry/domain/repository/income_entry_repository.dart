@@ -4,6 +4,13 @@ import 'package:zlux_pos/features/income_entry/domain/entities/income_entry_enti
 abstract class IncomeEntryRepository {
   Stream<List<IncomeEntryEntity>> watchIncomeEntries();
 
+  Stream<List<IncomeEntryEntity>> watchIncomeEntriesByDate(DateTime date);
+
+  Stream<List<DateTime>> watchIncomeDatesInMonth({
+    required int year,
+    required int month,
+  });
+
   Future<IncomeEntryEntity?> getIncomeEntry(String id);
 
   Future<Result<IncomeEntryEntity>> saveIncomeEntry({

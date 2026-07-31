@@ -28,6 +28,23 @@ class ExpenseEntryLocalDatasource {
         .map((rows) => rows.map((r) => r.toEntity()).toList());
   }
 
+  Stream<List<ExpenseEntryEntity>> watchExpenseEntriesByDate(
+    String ownerId,
+    DateTime date,
+  ) {
+    return _dao
+        .watchExpenseEntriesByDate(ownerId, date)
+        .map((rows) => rows.map((r) => r.toEntity()).toList());
+  }
+
+  Stream<List<DateTime>> watchDatesInMonth(
+    String ownerId,
+    int year,
+    int month,
+  ) {
+    return _dao.watchDatesInMonth(ownerId, year, month);
+  }
+
   Future<ExpenseEntryEntity?> getExpenseEntry(String id) async {
     final row = await _dao.getExpenseEntry(id);
     return row?.toEntity();

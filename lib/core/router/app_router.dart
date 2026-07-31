@@ -23,6 +23,8 @@ import '../../features/expense_entry/form/presentation/view/new_expense_entry_sc
 import '../../features/expense_entry/list/view/expense_entry_list_screen.dart';
 import '../../features/income_entry/form/presentation/view/new_income_entry_screen.dart';
 import '../../features/income_entry/list/view/income_entry_list_screen.dart';
+import '../../features/report/presentation/view/report_detail_screen.dart';
+import '../../features/report/presentation/view/report_list_screen.dart';
 import '../../features/setup/expense/form/presentation/view/new_expense_screen.dart';
 import '../../features/setup/expense/list/view/setup_expense_screen.dart';
 import 'route_paths.dart';
@@ -145,6 +147,19 @@ GoRouter appRouter(Ref ref) {
             builder:
                 (context, state) =>
                     OrderEditScreen(orderId: state.pathParameters['id']!),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: RoutePaths.report,
+        builder: (context, state) => const ReportListScreen(),
+        routes: [
+          GoRoute(
+            path: ':date',
+            builder: (context, state) {
+              final date = DateTime.parse(state.pathParameters['date']!);
+              return ReportDetailScreen(date: date);
+            },
           ),
         ],
       ),

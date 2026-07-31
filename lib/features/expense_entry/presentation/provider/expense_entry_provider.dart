@@ -11,6 +11,9 @@ import 'package:zlux_pos/features/expense_entry/domain/usecase/pull_expense_entr
 import 'package:zlux_pos/features/expense_entry/domain/usecase/save_expense_entry_usecase.dart';
 import 'package:zlux_pos/features/expense_entry/domain/usecase/watch_expense_entries_usecase.dart';
 
+import '../../domain/usecase/watch_expense_dates_in_month_usecase.dart';
+import '../../domain/usecase/watch_expense_entries_by_date_usecase.dart';
+
 part 'expense_entry_provider.g.dart';
 
 String _requireUid() {
@@ -69,4 +72,22 @@ WatchExpenseEntriesUsecase watchExpenseEntriesUsecase(
   WatchExpenseEntriesUsecaseRef ref,
 ) {
   return WatchExpenseEntriesUsecase(ref.watch(expenseEntryRepositoryProvider));
+}
+
+@riverpod
+WatchExpenseEntriesByDateUsecase watchExpenseEntriesByDateUsecase(
+  WatchExpenseEntriesByDateUsecaseRef ref,
+) {
+  return WatchExpenseEntriesByDateUsecase(
+    ref.watch(expenseEntryRepositoryProvider),
+  );
+}
+
+@riverpod
+WatchExpenseDatesInMonthUsecase watchExpenseDatesInMonthUsecase(
+  WatchExpenseDatesInMonthUsecaseRef ref,
+) {
+  return WatchExpenseDatesInMonthUsecase(
+    ref.watch(expenseEntryRepositoryProvider),
+  );
 }

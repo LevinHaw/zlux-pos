@@ -153,5 +153,47 @@ final watchIncomeEntriesUsecaseProvider =
 // ignore: unused_element
 typedef WatchIncomeEntriesUsecaseRef =
     AutoDisposeProviderRef<WatchIncomeEntriesUsecase>;
+String _$watchIncomeEntriesByDateUsecaseHash() =>
+    r'370f891e0ba4afb04ab116ee3a1c1f805aec506a';
+
+/// See also [watchIncomeEntriesByDateUsecase].
+@ProviderFor(watchIncomeEntriesByDateUsecase)
+final watchIncomeEntriesByDateUsecaseProvider =
+    AutoDisposeProvider<WatchIncomeEntriesByDateUsecase>.internal(
+      watchIncomeEntriesByDateUsecase,
+      name: r'watchIncomeEntriesByDateUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchIncomeEntriesByDateUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchIncomeEntriesByDateUsecaseRef =
+    AutoDisposeProviderRef<WatchIncomeEntriesByDateUsecase>;
+String _$watchIncomeDatesInMonthUsecaseHash() =>
+    r'fd994a39f8c566791f89a9f8ec44e480e6d8894b';
+
+/// See also [watchIncomeDatesInMonthUsecase].
+@ProviderFor(watchIncomeDatesInMonthUsecase)
+final watchIncomeDatesInMonthUsecaseProvider =
+    AutoDisposeProvider<WatchIncomeDatesInMonthUsecase>.internal(
+      watchIncomeDatesInMonthUsecase,
+      name: r'watchIncomeDatesInMonthUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchIncomeDatesInMonthUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchIncomeDatesInMonthUsecaseRef =
+    AutoDisposeProviderRef<WatchIncomeDatesInMonthUsecase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
