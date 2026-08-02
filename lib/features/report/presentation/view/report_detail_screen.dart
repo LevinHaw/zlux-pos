@@ -26,10 +26,12 @@ class _ReportDetailScreenState extends ConsumerState<ReportDetailScreen> {
     setState(() => _isExporting = true);
     try {
       final merchant = await ref.read(merchantProfileProvider.future);
+      final note = ref.read(dailyReportNoteProvider(widget.date)).valueOrNull;
       final service = ref.read(dailyReportPdfServiceProvider);
       await service.exportAndShare(
         report: report,
         merchantName: merchant?.name,
+        note: note?.note ?? '',
       );
     } catch (e) {
       if (mounted) {
@@ -74,7 +76,11 @@ class _ReportDetailScreenState extends ConsumerState<ReportDetailScreen> {
         ],
       ),
       body: reportAsync.when(
-        data: (report) => _ReportDetailBody(report: report, currency: currency),
+        data: (report) => _ReportDetailBody(
+          date: widget.date,
+          report: report,
+          currency: currency,
+        ),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, _) => Center(child: Text('$error')),
       ),
@@ -83,10 +89,15 @@ class _ReportDetailScreenState extends ConsumerState<ReportDetailScreen> {
 }
 
 class _ReportDetailBody extends StatelessWidget {
+  final DateTime date;
   final DailyReportDetailEntity report;
   final NumberFormat currency;
 
-  const _ReportDetailBody({required this.report, required this.currency});
+  const _ReportDetailBody({
+    required this.date,
+    required this.report,
+    required this.currency,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +106,9 @@ class _ReportDetailBody extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.all(AppSizes.lg),
       children: [
+        _DailyNoteSection(date: date),
+        SizedBox(height: AppSizes.lg),
+
         _SectionTitle(context.strings.reportProductDetail),
         SizedBox(height: AppSizes.sm),
         if (report.productSummaries.isEmpty)
@@ -172,6 +186,101 @@ class _ReportDetailBody extends StatelessWidget {
               isProfit ? context.appColors.success : context.appColors.error,
         ),
         SizedBox(height: AppSizes.lg),
+      ],
+    );
+  }
+}
+
+class _DailyNoteSection extends ConsumerStatefulWidget {
+  final DateTime date;
+
+  const _DailyNoteSection({required this.date});
+
+  @override
+  ConsumerState<_DailyNoteSection> createState() => _DailyNoteSectionState();
+}
+
+class _DailyNoteSectionState extends ConsumerState<_DailyNoteSection> {
+  final _controller = TextEditingController();
+  bool _seeded = false;
+  bool _isSaving = false;
+  bool _isDirty = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save() async {
+    setState(() => _isSaving = true);
+    try {
+      final usecase = ref.read(saveDailyReportNoteUsecaseProvider);
+      await usecase(date: widget.date, note: _controller.text);
+      if (mounted) {
+        setState(() => _isDirty = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(context.strings.reportNoteSaved)),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('$e')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isSaving = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final noteAsync = ref.watch(dailyReportNoteProvider(widget.date));
+
+    // Seed the controller once with whatever is already saved for this
+    // day, without overwriting text the user is currently typing.
+    noteAsync.whenData((note) {
+      if (!_seeded) {
+        _seeded = true;
+        _controller.text = note?.note ?? '';
+      }
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SectionTitle(context.strings.reportDailyNote),
+        SizedBox(height: AppSizes.sm),
+        TextField(
+          controller: _controller,
+          maxLines: 4,
+          minLines: 2,
+          decoration: InputDecoration(
+            hintText: context.strings.reportDailyNoteHint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(AppSizes.radiusSm),
+            ),
+          ),
+          onChanged: (_) {
+            if (!_isDirty) setState(() => _isDirty = true);
+          },
+        ),
+        SizedBox(height: AppSizes.sm),
+        Align(
+          alignment: Alignment.centerRight,
+          child: FilledButton.icon(
+            onPressed: (_isSaving || !_isDirty) ? null : _save,
+            icon: _isSaving
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.save_outlined, size: AppSizes.iconSm),
+            label: Text(context.strings.save),
+          ),
+        ),
       ],
     );
   }

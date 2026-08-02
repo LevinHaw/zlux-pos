@@ -3670,6 +3670,417 @@ class ExpenseEntriesCompanion extends UpdateCompanion<ExpenseEntryData> {
   }
 }
 
+class $DailyReportNotesTable extends DailyReportNotes
+    with TableInfo<$DailyReportNotesTable, DailyReportNoteData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $DailyReportNotesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _ownerIdMeta = const VerificationMeta(
+    'ownerId',
+  );
+  @override
+  late final GeneratedColumn<String> ownerId = GeneratedColumn<String>(
+    'owner_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _dateMeta = const VerificationMeta('date');
+  @override
+  late final GeneratedColumn<DateTime> date = GeneratedColumn<DateTime>(
+    'date',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _noteMeta = const VerificationMeta('note');
+  @override
+  late final GeneratedColumn<String> note = GeneratedColumn<String>(
+    'note',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(''),
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _isSyncedMeta = const VerificationMeta(
+    'isSynced',
+  );
+  @override
+  late final GeneratedColumn<bool> isSynced = GeneratedColumn<bool>(
+    'is_synced',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("is_synced" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    ownerId,
+    date,
+    note,
+    updatedAt,
+    isSynced,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'daily_report_notes';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<DailyReportNoteData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('owner_id')) {
+      context.handle(
+        _ownerIdMeta,
+        ownerId.isAcceptableOrUnknown(data['owner_id']!, _ownerIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_ownerIdMeta);
+    }
+    if (data.containsKey('date')) {
+      context.handle(
+        _dateMeta,
+        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateMeta);
+    }
+    if (data.containsKey('note')) {
+      context.handle(
+        _noteMeta,
+        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
+      );
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    if (data.containsKey('is_synced')) {
+      context.handle(
+        _isSyncedMeta,
+        isSynced.isAcceptableOrUnknown(data['is_synced']!, _isSyncedMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  DailyReportNoteData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return DailyReportNoteData(
+      id:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}id'],
+          )!,
+      ownerId:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}owner_id'],
+          )!,
+      date:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.dateTime,
+            data['${effectivePrefix}date'],
+          )!,
+      note:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.string,
+            data['${effectivePrefix}note'],
+          )!,
+      updatedAt:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.dateTime,
+            data['${effectivePrefix}updated_at'],
+          )!,
+      isSynced:
+          attachedDatabase.typeMapping.read(
+            DriftSqlType.bool,
+            data['${effectivePrefix}is_synced'],
+          )!,
+    );
+  }
+
+  @override
+  $DailyReportNotesTable createAlias(String alias) {
+    return $DailyReportNotesTable(attachedDatabase, alias);
+  }
+}
+
+class DailyReportNoteData extends DataClass
+    implements Insertable<DailyReportNoteData> {
+  final String id;
+  final String ownerId;
+  final DateTime date;
+  final String note;
+  final DateTime updatedAt;
+  final bool isSynced;
+  const DailyReportNoteData({
+    required this.id,
+    required this.ownerId,
+    required this.date,
+    required this.note,
+    required this.updatedAt,
+    required this.isSynced,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['owner_id'] = Variable<String>(ownerId);
+    map['date'] = Variable<DateTime>(date);
+    map['note'] = Variable<String>(note);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    map['is_synced'] = Variable<bool>(isSynced);
+    return map;
+  }
+
+  DailyReportNotesCompanion toCompanion(bool nullToAbsent) {
+    return DailyReportNotesCompanion(
+      id: Value(id),
+      ownerId: Value(ownerId),
+      date: Value(date),
+      note: Value(note),
+      updatedAt: Value(updatedAt),
+      isSynced: Value(isSynced),
+    );
+  }
+
+  factory DailyReportNoteData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return DailyReportNoteData(
+      id: serializer.fromJson<String>(json['id']),
+      ownerId: serializer.fromJson<String>(json['ownerId']),
+      date: serializer.fromJson<DateTime>(json['date']),
+      note: serializer.fromJson<String>(json['note']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+      isSynced: serializer.fromJson<bool>(json['isSynced']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'ownerId': serializer.toJson<String>(ownerId),
+      'date': serializer.toJson<DateTime>(date),
+      'note': serializer.toJson<String>(note),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+      'isSynced': serializer.toJson<bool>(isSynced),
+    };
+  }
+
+  DailyReportNoteData copyWith({
+    String? id,
+    String? ownerId,
+    DateTime? date,
+    String? note,
+    DateTime? updatedAt,
+    bool? isSynced,
+  }) => DailyReportNoteData(
+    id: id ?? this.id,
+    ownerId: ownerId ?? this.ownerId,
+    date: date ?? this.date,
+    note: note ?? this.note,
+    updatedAt: updatedAt ?? this.updatedAt,
+    isSynced: isSynced ?? this.isSynced,
+  );
+  DailyReportNoteData copyWithCompanion(DailyReportNotesCompanion data) {
+    return DailyReportNoteData(
+      id: data.id.present ? data.id.value : this.id,
+      ownerId: data.ownerId.present ? data.ownerId.value : this.ownerId,
+      date: data.date.present ? data.date.value : this.date,
+      note: data.note.present ? data.note.value : this.note,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+      isSynced: data.isSynced.present ? data.isSynced.value : this.isSynced,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyReportNoteData(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('date: $date, ')
+          ..write('note: $note, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isSynced: $isSynced')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, ownerId, date, note, updatedAt, isSynced);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is DailyReportNoteData &&
+          other.id == this.id &&
+          other.ownerId == this.ownerId &&
+          other.date == this.date &&
+          other.note == this.note &&
+          other.updatedAt == this.updatedAt &&
+          other.isSynced == this.isSynced);
+}
+
+class DailyReportNotesCompanion extends UpdateCompanion<DailyReportNoteData> {
+  final Value<String> id;
+  final Value<String> ownerId;
+  final Value<DateTime> date;
+  final Value<String> note;
+  final Value<DateTime> updatedAt;
+  final Value<bool> isSynced;
+  final Value<int> rowid;
+  const DailyReportNotesCompanion({
+    this.id = const Value.absent(),
+    this.ownerId = const Value.absent(),
+    this.date = const Value.absent(),
+    this.note = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+    this.isSynced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  DailyReportNotesCompanion.insert({
+    required String id,
+    required String ownerId,
+    required DateTime date,
+    this.note = const Value.absent(),
+    required DateTime updatedAt,
+    this.isSynced = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : id = Value(id),
+       ownerId = Value(ownerId),
+       date = Value(date),
+       updatedAt = Value(updatedAt);
+  static Insertable<DailyReportNoteData> custom({
+    Expression<String>? id,
+    Expression<String>? ownerId,
+    Expression<DateTime>? date,
+    Expression<String>? note,
+    Expression<DateTime>? updatedAt,
+    Expression<bool>? isSynced,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (ownerId != null) 'owner_id': ownerId,
+      if (date != null) 'date': date,
+      if (note != null) 'note': note,
+      if (updatedAt != null) 'updated_at': updatedAt,
+      if (isSynced != null) 'is_synced': isSynced,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  DailyReportNotesCompanion copyWith({
+    Value<String>? id,
+    Value<String>? ownerId,
+    Value<DateTime>? date,
+    Value<String>? note,
+    Value<DateTime>? updatedAt,
+    Value<bool>? isSynced,
+    Value<int>? rowid,
+  }) {
+    return DailyReportNotesCompanion(
+      id: id ?? this.id,
+      ownerId: ownerId ?? this.ownerId,
+      date: date ?? this.date,
+      note: note ?? this.note,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isSynced: isSynced ?? this.isSynced,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (ownerId.present) {
+      map['owner_id'] = Variable<String>(ownerId.value);
+    }
+    if (date.present) {
+      map['date'] = Variable<DateTime>(date.value);
+    }
+    if (note.present) {
+      map['note'] = Variable<String>(note.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    if (isSynced.present) {
+      map['is_synced'] = Variable<bool>(isSynced.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('DailyReportNotesCompanion(')
+          ..write('id: $id, ')
+          ..write('ownerId: $ownerId, ')
+          ..write('date: $date, ')
+          ..write('note: $note, ')
+          ..write('updatedAt: $updatedAt, ')
+          ..write('isSynced: $isSynced, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3681,6 +4092,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $ExpenseTable expense = $ExpenseTable(this);
   late final $IncomeEntriesTable incomeEntries = $IncomeEntriesTable(this);
   late final $ExpenseEntriesTable expenseEntries = $ExpenseEntriesTable(this);
+  late final $DailyReportNotesTable dailyReportNotes = $DailyReportNotesTable(
+    this,
+  );
   late final ProductDao productDao = ProductDao(this as AppDatabase);
   late final CategoryDao categoryDao = CategoryDao(this as AppDatabase);
   late final OrdersDao ordersDao = OrdersDao(this as AppDatabase);
@@ -3690,6 +4104,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     this as AppDatabase,
   );
   late final ExpenseEntryDao expenseEntryDao = ExpenseEntryDao(
+    this as AppDatabase,
+  );
+  late final DailyReportNoteDao dailyReportNoteDao = DailyReportNoteDao(
     this as AppDatabase,
   );
   @override
@@ -3705,6 +4122,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     expense,
     incomeEntries,
     expenseEntries,
+    dailyReportNotes,
   ];
 }
 
@@ -5648,6 +6066,249 @@ typedef $$ExpenseEntriesTableProcessedTableManager =
       ExpenseEntryData,
       PrefetchHooks Function()
     >;
+typedef $$DailyReportNotesTableCreateCompanionBuilder =
+    DailyReportNotesCompanion Function({
+      required String id,
+      required String ownerId,
+      required DateTime date,
+      Value<String> note,
+      required DateTime updatedAt,
+      Value<bool> isSynced,
+      Value<int> rowid,
+    });
+typedef $$DailyReportNotesTableUpdateCompanionBuilder =
+    DailyReportNotesCompanion Function({
+      Value<String> id,
+      Value<String> ownerId,
+      Value<DateTime> date,
+      Value<String> note,
+      Value<DateTime> updatedAt,
+      Value<bool> isSynced,
+      Value<int> rowid,
+    });
+
+class $$DailyReportNotesTableFilterComposer
+    extends Composer<_$AppDatabase, $DailyReportNotesTable> {
+  $$DailyReportNotesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get ownerId => $composableBuilder(
+    column: $table.ownerId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get isSynced => $composableBuilder(
+    column: $table.isSynced,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$DailyReportNotesTableOrderingComposer
+    extends Composer<_$AppDatabase, $DailyReportNotesTable> {
+  $$DailyReportNotesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get ownerId => $composableBuilder(
+    column: $table.ownerId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get date => $composableBuilder(
+    column: $table.date,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get note => $composableBuilder(
+    column: $table.note,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get isSynced => $composableBuilder(
+    column: $table.isSynced,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$DailyReportNotesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $DailyReportNotesTable> {
+  $$DailyReportNotesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get ownerId =>
+      $composableBuilder(column: $table.ownerId, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get date =>
+      $composableBuilder(column: $table.date, builder: (column) => column);
+
+  GeneratedColumn<String> get note =>
+      $composableBuilder(column: $table.note, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+
+  GeneratedColumn<bool> get isSynced =>
+      $composableBuilder(column: $table.isSynced, builder: (column) => column);
+}
+
+class $$DailyReportNotesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $DailyReportNotesTable,
+          DailyReportNoteData,
+          $$DailyReportNotesTableFilterComposer,
+          $$DailyReportNotesTableOrderingComposer,
+          $$DailyReportNotesTableAnnotationComposer,
+          $$DailyReportNotesTableCreateCompanionBuilder,
+          $$DailyReportNotesTableUpdateCompanionBuilder,
+          (
+            DailyReportNoteData,
+            BaseReferences<
+              _$AppDatabase,
+              $DailyReportNotesTable,
+              DailyReportNoteData
+            >,
+          ),
+          DailyReportNoteData,
+          PrefetchHooks Function()
+        > {
+  $$DailyReportNotesTableTableManager(
+    _$AppDatabase db,
+    $DailyReportNotesTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer:
+              () =>
+                  $$DailyReportNotesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer:
+              () => $$DailyReportNotesTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer:
+              () => $$DailyReportNotesTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> ownerId = const Value.absent(),
+                Value<DateTime> date = const Value.absent(),
+                Value<String> note = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<bool> isSynced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DailyReportNotesCompanion(
+                id: id,
+                ownerId: ownerId,
+                date: date,
+                note: note,
+                updatedAt: updatedAt,
+                isSynced: isSynced,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String ownerId,
+                required DateTime date,
+                Value<String> note = const Value.absent(),
+                required DateTime updatedAt,
+                Value<bool> isSynced = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => DailyReportNotesCompanion.insert(
+                id: id,
+                ownerId: ownerId,
+                date: date,
+                note: note,
+                updatedAt: updatedAt,
+                isSynced: isSynced,
+                rowid: rowid,
+              ),
+          withReferenceMapper:
+              (p0) =>
+                  p0
+                      .map(
+                        (e) => (
+                          e.readTable(table),
+                          BaseReferences(db, table, e),
+                        ),
+                      )
+                      .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$DailyReportNotesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $DailyReportNotesTable,
+      DailyReportNoteData,
+      $$DailyReportNotesTableFilterComposer,
+      $$DailyReportNotesTableOrderingComposer,
+      $$DailyReportNotesTableAnnotationComposer,
+      $$DailyReportNotesTableCreateCompanionBuilder,
+      $$DailyReportNotesTableUpdateCompanionBuilder,
+      (
+        DailyReportNoteData,
+        BaseReferences<
+          _$AppDatabase,
+          $DailyReportNotesTable,
+          DailyReportNoteData
+        >,
+      ),
+      DailyReportNoteData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -5668,4 +6329,6 @@ class $AppDatabaseManager {
       $$IncomeEntriesTableTableManager(_db, _db.incomeEntries);
   $$ExpenseEntriesTableTableManager get expenseEntries =>
       $$ExpenseEntriesTableTableManager(_db, _db.expenseEntries);
+  $$DailyReportNotesTableTableManager get dailyReportNotes =>
+      $$DailyReportNotesTableTableManager(_db, _db.dailyReportNotes);
 }

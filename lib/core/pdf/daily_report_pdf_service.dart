@@ -16,11 +16,18 @@ class DailyReportPdfService {
 
   static final _dateFormat = DateFormat('d MMMM yyyy');
 
+  /// Builds the PDF and opens the OS share sheet so the user can save it,
+  /// send it via WhatsApp/email, etc.
   Future<void> exportAndShare({
     required DailyReportDetailEntity report,
     String? merchantName,
+    String note = '',
   }) async {
-    final document = _buildDocument(report: report, merchantName: merchantName);
+    final document = _buildDocument(
+      report: report,
+      merchantName: merchantName,
+      note: note,
+    );
     await Printing.sharePdf(
       bytes: await document.save(),
       filename:
@@ -32,14 +39,20 @@ class DailyReportPdfService {
   Future<void> printDocument({
     required DailyReportDetailEntity report,
     String? merchantName,
+    String note = '',
   }) async {
-    final document = _buildDocument(report: report, merchantName: merchantName);
+    final document = _buildDocument(
+      report: report,
+      merchantName: merchantName,
+      note: note,
+    );
     await Printing.layoutPdf(onLayout: (_) => document.save());
   }
 
   pw.Document _buildDocument({
     required DailyReportDetailEntity report,
     String? merchantName,
+    String note = '',
   }) {
     final doc = pw.Document();
 
@@ -53,6 +66,13 @@ class DailyReportPdfService {
           ),
           pw.Text(_dateFormat.format(report.date)),
           pw.SizedBox(height: 20),
+
+          if (note.trim().isNotEmpty) ...[
+            _sectionTitle('Catatan Harian'),
+            pw.SizedBox(height: 6),
+            pw.Text(note),
+            pw.SizedBox(height: 20),
+          ],
 
           _sectionTitle('Detail Transaksi per Produk'),
           pw.SizedBox(height: 6),

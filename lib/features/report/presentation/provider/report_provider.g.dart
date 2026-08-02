@@ -368,5 +368,254 @@ class _DailyReportDetailProviderElement
   DateTime get date => (origin as DailyReportDetailProvider).date;
 }
 
+String _$dailyReportNoteLocalDataSourceHash() =>
+    r'6aaa2700800250ac55a0fd7fc26b0114c9b368e9';
+
+/// See also [dailyReportNoteLocalDataSource].
+@ProviderFor(dailyReportNoteLocalDataSource)
+final dailyReportNoteLocalDataSourceProvider =
+    AutoDisposeProvider<DailyReportNoteLocalDatasource>.internal(
+      dailyReportNoteLocalDataSource,
+      name: r'dailyReportNoteLocalDataSourceProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$dailyReportNoteLocalDataSourceHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DailyReportNoteLocalDataSourceRef =
+    AutoDisposeProviderRef<DailyReportNoteLocalDatasource>;
+String _$dailyReportNoteRemoteDataSourceHash() =>
+    r'bb317566ed836fc0793d0f3dea3ecd87bf6431b1';
+
+/// See also [dailyReportNoteRemoteDataSource].
+@ProviderFor(dailyReportNoteRemoteDataSource)
+final dailyReportNoteRemoteDataSourceProvider =
+    AutoDisposeProvider<DailyReportNoteRemoteDatasource>.internal(
+      dailyReportNoteRemoteDataSource,
+      name: r'dailyReportNoteRemoteDataSourceProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$dailyReportNoteRemoteDataSourceHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DailyReportNoteRemoteDataSourceRef =
+    AutoDisposeProviderRef<DailyReportNoteRemoteDatasource>;
+String _$dailyReportNoteRepositoryHash() =>
+    r'c235a4a827a2735ef073dd3ecf45c1ec6000dfc5';
+
+/// See also [dailyReportNoteRepository].
+@ProviderFor(dailyReportNoteRepository)
+final dailyReportNoteRepositoryProvider =
+    AutoDisposeProvider<DailyReportNoteRepository>.internal(
+      dailyReportNoteRepository,
+      name: r'dailyReportNoteRepositoryProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$dailyReportNoteRepositoryHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef DailyReportNoteRepositoryRef =
+    AutoDisposeProviderRef<DailyReportNoteRepository>;
+String _$saveDailyReportNoteUsecaseHash() =>
+    r'b743719b2a4ec7e056ec6395a8301fb5cd762b54';
+
+/// See also [saveDailyReportNoteUsecase].
+@ProviderFor(saveDailyReportNoteUsecase)
+final saveDailyReportNoteUsecaseProvider =
+    AutoDisposeProvider<SaveDailyReportNoteUsecase>.internal(
+      saveDailyReportNoteUsecase,
+      name: r'saveDailyReportNoteUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$saveDailyReportNoteUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef SaveDailyReportNoteUsecaseRef =
+    AutoDisposeProviderRef<SaveDailyReportNoteUsecase>;
+String _$watchDailyReportNoteUsecaseHash() =>
+    r'85c00326b2ccf3e082e7887be53c265e5ce6eee2';
+
+/// See also [watchDailyReportNoteUsecase].
+@ProviderFor(watchDailyReportNoteUsecase)
+final watchDailyReportNoteUsecaseProvider =
+    AutoDisposeProvider<WatchDailyReportNoteUsecase>.internal(
+      watchDailyReportNoteUsecase,
+      name: r'watchDailyReportNoteUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$watchDailyReportNoteUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef WatchDailyReportNoteUsecaseRef =
+    AutoDisposeProviderRef<WatchDailyReportNoteUsecase>;
+String _$pullDailyReportNotesUsecaseHash() =>
+    r'25d4db73b52b1caaa45bcf1d9a7b85d094c6ad92';
+
+/// See also [pullDailyReportNotesUsecase].
+@ProviderFor(pullDailyReportNotesUsecase)
+final pullDailyReportNotesUsecaseProvider =
+    AutoDisposeProvider<PullDailyReportNotesUsecase>.internal(
+      pullDailyReportNotesUsecase,
+      name: r'pullDailyReportNotesUsecaseProvider',
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$pullDailyReportNotesUsecaseHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef PullDailyReportNotesUsecaseRef =
+    AutoDisposeProviderRef<PullDailyReportNotesUsecase>;
+String _$dailyReportNoteHash() => r'631176c37cc61a2b2e88396bd385c3c6ed2fe73a';
+
+/// See also [dailyReportNote].
+@ProviderFor(dailyReportNote)
+const dailyReportNoteProvider = DailyReportNoteFamily();
+
+/// See also [dailyReportNote].
+class DailyReportNoteFamily extends Family<AsyncValue<DailyReportNoteEntity?>> {
+  /// See also [dailyReportNote].
+  const DailyReportNoteFamily();
+
+  /// See also [dailyReportNote].
+  DailyReportNoteProvider call(DateTime date) {
+    return DailyReportNoteProvider(date);
+  }
+
+  @override
+  DailyReportNoteProvider getProviderOverride(
+    covariant DailyReportNoteProvider provider,
+  ) {
+    return call(provider.date);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'dailyReportNoteProvider';
+}
+
+/// See also [dailyReportNote].
+class DailyReportNoteProvider
+    extends AutoDisposeStreamProvider<DailyReportNoteEntity?> {
+  /// See also [dailyReportNote].
+  DailyReportNoteProvider(DateTime date)
+    : this._internal(
+        (ref) => dailyReportNote(ref as DailyReportNoteRef, date),
+        from: dailyReportNoteProvider,
+        name: r'dailyReportNoteProvider',
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$dailyReportNoteHash,
+        dependencies: DailyReportNoteFamily._dependencies,
+        allTransitiveDependencies:
+            DailyReportNoteFamily._allTransitiveDependencies,
+        date: date,
+      );
+
+  DailyReportNoteProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.date,
+  }) : super.internal();
+
+  final DateTime date;
+
+  @override
+  Override overrideWith(
+    Stream<DailyReportNoteEntity?> Function(DailyReportNoteRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: DailyReportNoteProvider._internal(
+        (ref) => create(ref as DailyReportNoteRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        date: date,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<DailyReportNoteEntity?> createElement() {
+    return _DailyReportNoteProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is DailyReportNoteProvider && other.date == date;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, date.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin DailyReportNoteRef
+    on AutoDisposeStreamProviderRef<DailyReportNoteEntity?> {
+  /// The parameter `date` of this provider.
+  DateTime get date;
+}
+
+class _DailyReportNoteProviderElement
+    extends AutoDisposeStreamProviderElement<DailyReportNoteEntity?>
+    with DailyReportNoteRef {
+  _DailyReportNoteProviderElement(super.provider);
+
+  @override
+  DateTime get date => (origin as DailyReportNoteProvider).date;
+}
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

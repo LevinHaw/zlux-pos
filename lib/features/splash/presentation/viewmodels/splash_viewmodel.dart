@@ -7,6 +7,7 @@ import 'package:zlux_pos/features/expense_entry/presentation/provider/expense_en
 import 'package:zlux_pos/features/income_entry/presentation/provider/income_entry_provider.dart';
 import 'package:zlux_pos/features/onboarding/presentation/provider/onboarding_provider.dart';
 import 'package:zlux_pos/features/order/presentation/order_provider.dart';
+import 'package:zlux_pos/features/report/presentation/provider/report_provider.dart';
 import 'package:zlux_pos/features/setup/expense/presentation/provider/expense_provider.dart';
 import 'package:zlux_pos/features/setup/income/presentation/provider/income_provider.dart';
 import 'package:zlux_pos/features/setup/product/presentation/provider/product_provider.dart';
@@ -18,7 +19,7 @@ part 'splash_viewmodel.g.dart';
 class SplashViewModel extends _$SplashViewModel {
   @override
   Future<SplashDestination> build() async {
-    final minDelay = Future.delayed(const Duration(seconds: 2));
+    final minDelay = Future.delayed(const Duration(milliseconds: 800));
 
     final destinationCheck = _resolveDestination();
 
@@ -65,6 +66,7 @@ class SplashViewModel extends _$SplashViewModel {
       ref.read(pullIncomeUsecaseProvider)(),
       ref.read(pullExpenseEntriesUsecaseProvider)(),
       ref.read(pullIncomeEntriesUsecaseProvider)(),
+      ref.read(pullDailyReportNotesUsecaseProvider)(),
     ]);
   }
 }

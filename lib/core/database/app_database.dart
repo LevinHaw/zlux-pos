@@ -18,21 +18,23 @@ import 'package:zlux_pos/core/database/table/product_table.dart';
 
 import 'dao/expense_entry_dao.dart';
 import 'dao/income_entry_dao.dart';
+import 'dao/daily_report_note_dao.dart';
 import 'table/expense_entries_table.dart';
 import 'table/income_entries_table.dart';
+import 'table/daily_report_notes_table.dart';
 
 
 part 'app_database.g.dart';
 
 @DriftDatabase(
-  tables: [Product, Category, Orders, OrderItems, Income, Expense, IncomeEntries, ExpenseEntries],
-  daos: [ProductDao, CategoryDao, OrdersDao, IncomeDao, ExpenseDao, IncomeEntryDao, ExpenseEntryDao],
+  tables: [Product, Category, Orders, OrderItems, Income, Expense, IncomeEntries, ExpenseEntries, DailyReportNotes],
+  daos: [ProductDao, CategoryDao, OrdersDao, IncomeDao, ExpenseDao, IncomeEntryDao, ExpenseEntryDao, DailyReportNoteDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -52,6 +54,9 @@ class AppDatabase extends _$AppDatabase {
           }
           if (from < 5) {
             await m.createTable(income);
+          }
+          if (from < 6) {
+            await m.createTable(dailyReportNotes);
           }
         },
       );

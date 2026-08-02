@@ -11,6 +11,7 @@ import 'package:zlux_pos/features/auth/presentation/provider/auth_provider.dart'
 import 'package:zlux_pos/features/expense_entry/presentation/provider/expense_entry_provider.dart';
 import 'package:zlux_pos/features/income_entry/presentation/provider/income_entry_provider.dart';
 import 'package:zlux_pos/features/order/presentation/order_provider.dart';
+import 'package:zlux_pos/features/report/presentation/provider/report_provider.dart';
 import 'package:zlux_pos/features/setup/expense/presentation/provider/expense_provider.dart';
 import 'package:zlux_pos/features/setup/income/presentation/provider/income_provider.dart';
 import 'package:zlux_pos/features/setup/product/presentation/provider/product_provider.dart';
@@ -63,6 +64,7 @@ class LoginViewModel extends _$LoginViewModel {
       ref.read(pullIncomeUsecaseProvider)(),
       ref.read(pullExpenseEntriesUsecaseProvider)(),
       ref.read(pullIncomeEntriesUsecaseProvider)(),
+      ref.read(pullDailyReportNotesUsecaseProvider)(),
     ]);
   }
 }

@@ -51,7 +51,8 @@ class AppLocalizations {
   String get reportIncomeEntry =>
       _id ? 'Pendapatan dari income entry' : 'Income from income entries';
   String get reportTotalIncome => _id ? 'Total pendapatan' : 'Total income';
-  String get reportTotalExpense => _id ? 'Total pengeluaran' : 'Total expense';
+  String get reportTotalExpense =>
+      _id ? 'Total pengeluaran' : 'Total expense';
   String get reportProfit => _id ? 'Laba' : 'Profit';
   String get pickReportDate => _id ? 'Pilih tanggal' : 'Pick date';
   String get reportMenu => _id ? 'Laporan' : 'Report';
@@ -63,6 +64,12 @@ class AppLocalizations {
   String get reportTransfer => _id ? 'Transfer' : 'Transfer';
   String get product => _id ? 'Produk' : 'Product';
   String get quantity => _id ? 'Jumlah' : 'Quantity';
+  String get reportDailyNote => _id ? 'Catatan harian' : 'Daily note';
+  String get reportDailyNoteHint => _id
+      ? 'Contoh: 50 motor, 20 mobil, 70 pelanggan'
+      : 'Example: 50 motorcycles, 20 cars, 70 customers';
+  String get reportNoteSaved =>
+      _id ? 'Catatan tersimpan' : 'Note saved';
 
   String get home => _id ? 'Beranda' : 'Home';
   String get history => _id ? 'Riwayat' : 'History';
