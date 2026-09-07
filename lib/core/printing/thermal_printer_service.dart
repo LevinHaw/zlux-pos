@@ -161,6 +161,15 @@ class ThermalPrinterService {
     }
 
     bytes += generator.hr();
+
+    if (order.notes.trim().isNotEmpty) {
+      bytes += generator.text(
+        'Note: ${order.notes.trim()}',
+        styles: const PosStyles(align: PosAlign.left),
+      );
+      bytes += generator.hr();
+    }
+
     bytes += generator.row([
       PosColumn(
         text: 'Total',
